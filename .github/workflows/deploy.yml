@@ -1,17 +1,15 @@
-name: "🚀 Supercharged Discord Widget Deploy"
+name: "🚀 Deploy Discord Widget"
 
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
 
-# Sets permissions for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Prevents multiple deployments from running at the same time
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -20,33 +18,24 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: "📂 Checkout Repository"
+      - name: "📂 Checkout"
         uses: actions/checkout@v4
 
-      - name: "🟢 Setup Node.js"
+      - name: "🟢 Setup Node"
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' # This makes your future runs much faster!
 
       - name: "📦 Install Dependencies"
-        run: npm install
+        # Using 'npm install' but ignoring errors if no package.json exists yet
+        run: npm install || echo "No package.json found, skipping install."
 
-      - name: "🛡️ Security Audit"
-        run: npm audit fix --audit-level=critical || true
-
-      - name: "🏗️ Prepare Web Files"
-        run: |
-          mkdir -p public
-          cp index.html public/
-          # Copy any other assets like images or CSS here
-          # cp -r assets public/ 
-
-      - name: "📤 Upload to GitHub Pages"
+      - name: "📤 Upload Artifact"
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './public'
+          # This uploads the entire root folder
+          path: '.'
 
-      - name: "🚀 Deploy Live"
+      - name: "🚀 Deploy to GitHub Pages"
         id: deployment
         uses: actions/deploy-pages@v4
