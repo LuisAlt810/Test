@@ -1,60 +1,130 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Baloo 2', cursive;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1dd3b0, #48cae4, #90dbf4);
+  background: linear-gradient(180deg, #48cae4, #90dbf4, #caf0f8);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
+  overflow: hidden;
+  color: #fff;
 }
 
+/* 🌴 LOADER */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #0096c7, #48cae4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.island {
+  width: 220px;
+  height: 130px;
+  background: #d4a373;
+  border-radius: 0 0 120px 120px;
+  position: relative;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+.palm {
+  position: absolute;
+  bottom: 85px;
+  left: 50%;
+  width: 12px;
+  height: 80px;
+  background: #6a994e;
+  transform: translateX(-50%);
+  border-radius: 6px;
+}
+
+.leaf {
+  position: absolute;
+  top: -10px;
+  width: 60px;
+  height: 18px;
+  background: #6a994e;
+  border-radius: 50px;
+}
+
+.leaf.left { left: -45px; transform: rotate(-30deg); }
+.leaf.right { right: -45px; transform: rotate(30deg); }
+
+.loader-text {
+  margin-top: 24px;
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 🌊 MAIN */
 .overlay {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(255,255,255,0.2), transparent 70%);
+  background: radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 70%);
   pointer-events: none;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 32px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+  padding: 36px;
   max-width: 900px;
-  width: 90%;
+  width: 92%;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 1.2s ease;
+  box-shadow: 0 35px 80px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.6s ease;
+}
+
+.container.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.owner img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.7);
+  margin-bottom: 12px;
 }
 
 .title {
   font-size: 3rem;
-  color: #ffffff;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }
 
 .subtitle {
-  font-size: 1.5rem;
   margin-bottom: 20px;
-  color: #e0fbfc;
+  opacity: 0.9;
 }
 
 .video-box {
   position: relative;
   width: 100%;
   padding-top: 56.25%;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  margin: 20px 0;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+  margin: 24px 0;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
 }
 
 .video-box iframe {
@@ -65,30 +135,17 @@ body {
 }
 
 .description {
-  color: #ffffff;
-  margin: 20px 0;
   font-size: 1.1rem;
+  margin: 18px 0;
 }
 
 .credits {
-  margin-top: 25px;
-  padding-top: 15px;
+  margin-top: 22px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255,255,255,0.3);
-  color: #f1faee;
   font-size: 0.95rem;
 }
 
 .credits strong {
   color: #ffd166;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(25px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
