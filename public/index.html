@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🌴 Island Song – Ti ki ti ki</title>
 
   <link rel="icon" href="https://emojiapi.dev/api/v1/palm_tree/64.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- 🌴 LOADER -->
-  <div id="loader">
-    <div class="island">
-      <div class="palm">
-        <div class="leaf left"></div>
-        <div class="leaf right"></div>
+  <!-- LOADER -->
+  <div id="loader" aria-hidden="false">
+    <div class="loader-inner">
+      <div class="rings">
+        <span class="ring r1"></span>
+        <span class="ring r2"></span>
+        <span class="ring r3"></span>
       </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="percent" id="percent">0%</div>
+      <div class="loader-caption">Preparing island vibes…</div>
     </div>
-    <p class="loader-text">Loading island vibes… 🌊</p>
   </div>
 
-  <!-- 🌊 MAIN -->
-  <div class="overlay"></div>
+  <!-- MAIN CONTENT (hidden until loader completes) -->
+  <div class="overlay" aria-hidden="true"></div>
 
-  <main class="container">
+  <main class="container" role="main" aria-hidden="true">
     <div class="owner">
-      <img src="https://cdn.discordapp.com/avatars/967200130757439580/358add4c876dcc39e2fc45588c16c27b.webp?size=128" alt="Owner PFP">
+      <img
+        src="https://cdn.discordapp.com/avatars/967200130757439580/358add4c876dcc39e2fc45588c16c27b.webp?size=128"
+        alt="Owner avatar"
+        loading="lazy"
+      />
     </div>
 
     <h1 class="title">🌴 Island Song</h1>
     <h2 class="subtitle">Ti ki ti ki 🎶</h2>
 
-    <div class="video-box">
+    <div class="video-box" id="videoBox">
       <iframe
-        src="https://www.youtube.com/embed/q3w-NOtKo4A"
+        id="ytPlayer"
+        src=""
         title="Island Song - Ti ki ti ki"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
       </iframe>
     </div>
 
     <p class="description">
-      Chill island vibes, soft waves, and classic energy 🌊  
-      Sit back and enjoy the song.
+      Chill island vibes, soft waves, and retro charm. Sit back and enjoy. 🌊
     </p>
 
     <footer class="credits">
