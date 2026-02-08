@@ -113,8 +113,9 @@
 
     <div class="video-box">
       <iframe
-        src="https://www.youtube.com/embed/tC17uOcmZqE?si=nIeBCOAGl1mqxPxA"
-        title="Gozalo"
+        id="ytPlayer"
+        src=""
+        title="YouTube player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -124,7 +125,7 @@
 
     <p class="description">
       Gorilla energy only 🦍🔥  
-      Turn it up and let the jungle move.
+      Jungle volume recommended 🔊
     </p>
 
     <footer class="credits">
@@ -134,7 +135,41 @@
   </main>
 
   <script>
-    // Subtle gorilla movement effect 🦍
+    // 🦍 Extract YouTube ID from almost anything
+    function getYouTubeID(input) {
+      if (!input) return null;
+
+      // Raw ID
+      if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+
+      try {
+        const url = new URL(input);
+        if (url.hostname.includes("youtu.be")) {
+          return url.pathname.slice(1);
+        }
+        if (url.searchParams.get("v")) {
+          return url.searchParams.get("v");
+        }
+      } catch {
+        return null;
+      }
+
+      return null;
+    }
+
+    // Read ?video= from URL
+    const params = new URLSearchParams(window.location.search);
+    const videoParam = params.get("video");
+
+    // Default Gozalo video ID
+    const defaultVideo = "tC17uOcmZqE";
+
+    const videoId = getYouTubeID(videoParam) || defaultVideo;
+
+    document.getElementById("ytPlayer").src =
+      `https://www.youtube.com/embed/${videoId}`;
+
+    // Subtle movement effect 🦍
     document.addEventListener("mousemove", (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 12;
       const y = (e.clientY / window.innerHeight - 0.5) * 12;
@@ -143,7 +178,9 @@
     });
 
     console.log(
-      "🦍 GOZALO 🦍\nWebsite by Luis"
+      "🦍 GOZALO PLAYER 🦍\n" +
+      "Supports ?video=youtu.be / watch?v= / raw ID\n" +
+      "Website by Luis"
     );
   </script>
 
